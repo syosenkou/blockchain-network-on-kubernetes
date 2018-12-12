@@ -122,3 +122,49 @@ spec:
     targetPort: 30411
     port: 30411
     name: events
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blockchain-org5peer1
+  labels:
+    run: blockchain-org5peer1
+spec:
+  type: NodePort
+  selector:
+    name: org5peer1
+  ports:
+  - protocol: TCP
+    nodePort: 30510
+    targetPort: 30510
+    port: 30510
+    name: grpc
+  - protocol: TCP
+    nodePort: 30511
+    targetPort: 30511
+    port: 30511
+    name: events
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blockchain-org5peer2
+  labels:
+    run: blockchain-org5peer2
+spec:
+  type: NodePort
+  selector:
+    name: org5peer2
+  ports:
+  - protocol: TCP
+    nodePort: 30501
+    targetPort: 30501
+    port: 30501
+    name: grpc
+  - protocol: TCP
+    nodePort: 30502
+    targetPort: 30502
+    port: 30502
+    name: events

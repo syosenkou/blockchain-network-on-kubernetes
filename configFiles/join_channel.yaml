@@ -131,3 +131,60 @@ spec:
         - mountPath: /shared
           name: sharedvolume
 
+      - name: joinchannel5
+        image: hyperledger/fabric-peer:x86_64-1.1.0
+        imagePullPolicy: Always
+        command: ["sh", "-c", "peer channel fetch newest -o ${ORDERER_URL} -c ${CHANNEL_NAME} && peer channel join -b ${CHANNEL_NAME}_newest.block "]
+        env:
+        - name: CHANNEL_NAME
+          value: channel1
+        - name: CORE_PEER_NETWORKID
+          value: nid1
+        - name: ORDERER_URL
+          value: blockchain-orderer:31010
+        - name: CORE_PEER_ADDRESS
+          value: blockchain-org5peer1:30510
+        - name: CORE_PEER_LOCALMSPID
+          value: Org5MSP
+        - name: CORE_PEER_MSPID
+          value: Org5MSP
+        - name: CORE_LOGGING_LEVEL
+          value: debug
+        - name: CORE_PEER_MSPCONFIGPATH
+          value: /shared/crypto-config/peerOrganizations/org5.example.com/users/Admin@org5.example.com/msp
+        - name: FABRIC_CFG_PATH
+          value: /etc/hyperledger/fabric
+        - name: GODEBUG
+          value: "netdns=go"
+        volumeMounts:
+        - mountPath: /shared
+          name: sharedvolume
+
+      - name: joinchannel5-org5peer2
+        image: hyperledger/fabric-peer:x86_64-1.1.0
+        imagePullPolicy: Always
+        command: ["sh", "-c", "peer channel fetch newest -o ${ORDERER_URL} -c ${CHANNEL_NAME} && peer channel join -b ${CHANNEL_NAME}_newest.block "]
+        env:
+        - name: CHANNEL_NAME
+          value: channel1
+        - name: CORE_PEER_NETWORKID
+          value: nid1
+        - name: ORDERER_URL
+          value: blockchain-orderer:31010
+        - name: CORE_PEER_ADDRESS
+          value: blockchain-org5peer2:30501
+        - name: CORE_PEER_LOCALMSPID
+          value: Org5MSP
+        - name: CORE_PEER_MSPID
+          value: Org5MSP
+        - name: CORE_LOGGING_LEVEL
+          value: debug
+        - name: CORE_PEER_MSPCONFIGPATH
+          value: /shared/crypto-config/peerOrganizations/org5.example.com/users/Admin@org5.example.com/msp
+        - name: FABRIC_CFG_PATH
+          value: /etc/hyperledger/fabric
+        - name: GODEBUG
+          value: "netdns=go"
+        volumeMounts:
+        - mountPath: /shared
+          name: sharedvolume
